@@ -4,11 +4,11 @@ import "./App.css";
 function App() {
   const [users, setUsers] = useState([]);
 
-  useEffect(() => {
-    fetch("http://localhost:3000/users")
-      .then((res) => res.json())
-      .then((data) => setUsers(data));
-  }, []);
+  // useEffect(() => {
+  //   fetch("http://localhost:3000/users")
+  //     .then((res) => res.json())
+  //     .then((data) => setUsers(data));
+  // }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,8 +28,7 @@ function App() {
       .then((data) => {
         // console.log(data);
         // Append new user to existing users
-        const newUsers = [...users, data];
-        setUsers(newUsers); // Update state
+        console.log(data);
       });
 
     form.reset();

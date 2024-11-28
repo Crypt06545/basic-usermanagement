@@ -6,7 +6,7 @@ const cors = require("cors");
 dotenv.config(); // Load environment variables
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 5000;
 
 // middlewares
 app.use(cors());
@@ -26,10 +26,15 @@ async function run() {
   try {
     await client.connect();
 
+    // create a database
+    const database = client.db("userDB");
+    const usersCollection = database.collection("user");
+
     app.post("/users", async (req, res) => {
       const user = req.body;
       console.log(user);
-      res.send("User received");
+      const result = await usersCollection.insertOne(user);
+      res.send(result);
     });
 
     await client.db("admin").command({ ping: 1 });
